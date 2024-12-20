@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quanta Project</title>
+</head>
+<body>
+    <h1>Stock Breakout Analyzer</h1>
+    <form id="breakoutForm">
+        <label for="ticker">Ticker:</label>
+        <input type="text" id="ticker" name="ticker" required><br><br>
+        
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+        
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+        
+        <label for="volume_threshold">Volume Threshold (%):</label>
+        <input type="number" id="volume_threshold" name="volume_threshold" required><br><br>
+        
+        <label for="price_change_threshold">Price Change Threshold (%):</label>
+        <input type="number" id="price_change_threshold" name="price_change_threshold" required><br><br>
+        
+        <button type="button" onclick="submitForm()">Analyze</button>
+    </form>
+    <script>
+        function submitForm() {
+            const formData = {
+                ticker: document.getElementById('ticker').value,
+                start_date: document.getElementById('start_date').value,
+                end_date: document.getElementById('end_date').value,
+                volume_threshold: parseFloat(document.getElementById('volume_threshold').value),
+                price_change_threshold: parseFloat(document.getElementById('price_change_threshold').value)
+            };
+
+            fetch('/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            }).then(response => response.json())
+              .then(data => console.log(data))
+              .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

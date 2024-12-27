@@ -60,11 +60,8 @@ def detect_breakouts(data, volume_threshold, price_change_threshold, holding_per
     breakout_days["holding_return"] = (
         (breakout_days["close_after_holding"] - breakout_days["close"]) / breakout_days["close"]
     ) * 100
-    
-    output_file = export_to_excel(breakout_days[["date", "volume", "close", "price_change_pct_to_prev_day", "closing_date_after_holding", "close_after_holding", "holding_return"]])
-    print(f"Breakout analysis exported to {output_file}")
 
-    # return breakout_days[["date", "volume", "close", "price_change_pct_to_prev_day", "closing_date_after_holding", "close_after_holding", "holding_return"]]
+    return breakout_days[["date", "volume", "close", "price_change_pct_to_prev_day", "closing_date_after_holding", "close_after_holding", "holding_return"]]
 
 
 # # Test function
